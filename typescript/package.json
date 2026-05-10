@@ -1,0 +1,20 @@
+{
+  "name": "agent-sdk-hello-world-ts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "hello": "tsx src/hello.ts",
+    "check-auth": "tsx src/check-auth.ts",
+    "news": "tsx src/news.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.2.111",
+    "dotenv": "^17.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
