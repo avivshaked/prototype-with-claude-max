@@ -8,35 +8,40 @@ If you already pay for Claude Pro/Max and want to script against the same model 
 
 ---
 
-## ⚠️ Prototyping only — do not use for production user-facing apps
+## ⚠️ The AUTH METHOD here is prototyping-only — not the SDK
 
-This repo demonstrates how to authenticate with a **personal subscription OAuth token**. That's appropriate for:
+To be precise about what's safe and what isn't: the **Agent SDK itself is a production-grade SDK** — Anthropic ships it for building real agentic applications. What this repo demonstrates that you should *not* ship to end users is the **auth method**: a personal-subscription OAuth token (`CLAUDE_CODE_OAUTH_TOKEN`).
+
+**That auth method is appropriate for:**
 
 - ✅ Personal scripts, CLI tools you run yourself
 - ✅ Learning the Agent SDK
 - ✅ Exploratory hacking and weekend projects
 - ✅ Internal automation that *you* are the only user of
 
-It is **not** appropriate for:
+**It is NOT appropriate for:**
 
 - ❌ Production user-facing applications
 - ❌ Anything that serves more than one human
 - ❌ Hosted backends, SaaS products, public APIs, multi-user agents
 
-**Why:**
+**Why the auth method, specifically:**
 
 1. **One-person quota.** Every request bills against a single person's Pro/Max subscription. Subscription plans are sized for individual use, not multi-user traffic — you'll hit rate limits almost immediately at any real scale.
-2. **Terms of service.** Pro/Max plans are licensed for individual use. Serving end users from one subscription token isn't what they're designed for and may violate Anthropic's terms.
+2. **Terms of service.** Pro/Max plans are licensed for individual use. Serving end users from one subscription token isn't what they're designed for and may violate Anthropic's terms (and as of April 2026, Anthropic actively blocks third-party harnesses that try this — see the README's bottom section).
 3. **Blast radius if leaked.** If the token ends up in client-side code, a logfile, or a public repo, anyone with it can drain your subscription until you rotate it.
 
-**For production, use the regular API instead:**
+**To go to production, swap the AUTH, not the SDK:**
 
-| Use case          | Right tool                                                                                                          | Auth                              |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| **Prototyping** (this repo) | [`claude-agent-sdk`](https://pypi.org/project/claude-agent-sdk/) / [`@anthropic-ai/claude-agent-sdk`](https://www.npmjs.com/package/@anthropic-ai/claude-agent-sdk) | `CLAUDE_CODE_OAUTH_TOKEN` (subscription) |
-| **Production**    | [`anthropic`](https://pypi.org/project/anthropic/) / [`@anthropic-ai/sdk`](https://www.npmjs.com/package/@anthropic-ai/sdk) | `ANTHROPIC_API_KEY` (per-token billing from [console.anthropic.com](https://console.anthropic.com)) |
+The SDK choice (Agent SDK vs. regular Anthropic SDK) is an orthogonal decision driven by what you're *building*, not by prototype-vs-production:
 
-The same model shows up in both — `claude-opus-4-7`, `claude-sonnet-4-6`, etc. Migrating from this prototype to a production-shaped app is largely a matter of swapping the SDK and the auth method.
+| What you're building                   | SDK                                                                                                          | Auth                                                   |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| Agentic app (tools, multi-turn loops)  | [`claude-agent-sdk`](https://pypi.org/project/claude-agent-sdk/) / [`@anthropic-ai/claude-agent-sdk`](https://www.npmjs.com/package/@anthropic-ai/claude-agent-sdk) | `ANTHROPIC_API_KEY` ← **production-ready**             |
+| Direct LLM calls (Q&A, classification, summarization) | [`anthropic`](https://pypi.org/project/anthropic/) / [`@anthropic-ai/sdk`](https://www.npmjs.com/package/@anthropic-ai/sdk) | `ANTHROPIC_API_KEY` ← **production-ready**             |
+| **Personal prototyping** (this repo)   | [`claude-agent-sdk`](https://pypi.org/project/claude-agent-sdk/) / [`@anthropic-ai/claude-agent-sdk`](https://www.npmjs.com/package/@anthropic-ai/claude-agent-sdk) | `CLAUDE_CODE_OAUTH_TOKEN` (subscription) ← **personal use only** |
+
+Going from this prototype to a production app generally means: keep the SDK if you're agentic, switch to the regular SDK if you only need direct LLM calls — and in both cases swap `CLAUDE_CODE_OAUTH_TOKEN` for `ANTHROPIC_API_KEY` from [console.anthropic.com](https://console.anthropic.com). Same models in both worlds (`claude-opus-4-7`, `claude-sonnet-4-6`, ...).
 
 ---
 
