@@ -1,5 +1,7 @@
 # Python — Agent SDK Hello World
 
+> *Last updated: 2026-05-10. SDK versions move fast — check `requirements.txt` against the latest on PyPI if something behaves unexpectedly.*
+
 Three small examples building on each other, all using the OAuth-token / Pro-Max-subscription flow.
 
 > **New here?** Read the [top-level README](../README.md) first — it explains what the Agent SDK is, how the OAuth flow works, and the auth-precedence gotcha. This file just covers Python-specific setup and code walkthroughs.

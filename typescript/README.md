@@ -1,5 +1,7 @@
 # TypeScript — Agent SDK Hello World
 
+> *Last updated: 2026-05-10. SDK versions move fast — check `package.json` against the latest on npm if something behaves unexpectedly.*
+
 Three small examples building on each other, all using the OAuth-token / Pro-Max-subscription flow.
 
 > **New here?** Read the [top-level README](../README.md) first — it explains what the Agent SDK is, how the OAuth flow works, and the auth-precedence gotcha. This file just covers TypeScript-specific setup and code walkthroughs.

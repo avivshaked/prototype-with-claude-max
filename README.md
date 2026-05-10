@@ -1,5 +1,7 @@
 # Prototype with Claude Max
 
+> *Last updated: 2026-05-10. Anthropic's subscription/API policies and SDK versions change — verify the linked docs before relying on specifics.*
+
 A small, **educational** repo showing how to prototype with the **Claude Agent SDK** in Python and TypeScript, billed against a Claude **Pro or Max** subscription via an OAuth token — instead of paying per-token API credits.
 
 If you already pay for Claude Pro/Max and want to script against the same model from your own code, this is the cheapest way to start.
