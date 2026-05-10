@@ -6,6 +6,15 @@ A small, **educational** repo showing how to prototype with the **Claude Agent S
 
 If you already pay for Claude Pro/Max and want to script against the same model from your own code, this is the cheapest way to start.
 
+**What this covers:**
+
+- A **Claude Agent SDK hello-world tutorial** in Python (`claude-agent-sdk`) and TypeScript (`@anthropic-ai/claude-agent-sdk`), side by side.
+- How to **use your Claude Pro or Max subscription** from your own code via the `CLAUDE_CODE_OAUTH_TOKEN` flow (no per-token API credits).
+- Why `ANTHROPIC_API_KEY` silently shadows your OAuth token, and a diagnostic script to detect it.
+- A working **`WebSearch` + token-by-token streaming** example built on the same flow.
+
+If you searched something like *"how to use Claude Max subscription with Python"*, *"Claude Agent SDK hello world tutorial"*, or *"prototype with Claude Pro subscription instead of API credits"* — this is built for you.
+
 ---
 
 ## ⚠️ The AUTH METHOD here is prototyping-only — not the SDK
