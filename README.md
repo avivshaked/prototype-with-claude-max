@@ -6,6 +6,38 @@ If you already pay for Claude Pro/Max and want to script against the same model 
 
 ---
 
+## ⚠️ Prototyping only — do not use for production user-facing apps
+
+This repo demonstrates how to authenticate with a **personal subscription OAuth token**. That's appropriate for:
+
+- ✅ Personal scripts, CLI tools you run yourself
+- ✅ Learning the Agent SDK
+- ✅ Exploratory hacking and weekend projects
+- ✅ Internal automation that *you* are the only user of
+
+It is **not** appropriate for:
+
+- ❌ Production user-facing applications
+- ❌ Anything that serves more than one human
+- ❌ Hosted backends, SaaS products, public APIs, multi-user agents
+
+**Why:**
+
+1. **One-person quota.** Every request bills against a single person's Pro/Max subscription. Subscription plans are sized for individual use, not multi-user traffic — you'll hit rate limits almost immediately at any real scale.
+2. **Terms of service.** Pro/Max plans are licensed for individual use. Serving end users from one subscription token isn't what they're designed for and may violate Anthropic's terms.
+3. **Blast radius if leaked.** If the token ends up in client-side code, a logfile, or a public repo, anyone with it can drain your subscription until you rotate it.
+
+**For production, use the regular API instead:**
+
+| Use case          | Right tool                                                                                                          | Auth                              |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| **Prototyping** (this repo) | [`claude-agent-sdk`](https://pypi.org/project/claude-agent-sdk/) / [`@anthropic-ai/claude-agent-sdk`](https://www.npmjs.com/package/@anthropic-ai/claude-agent-sdk) | `CLAUDE_CODE_OAUTH_TOKEN` (subscription) |
+| **Production**    | [`anthropic`](https://pypi.org/project/anthropic/) / [`@anthropic-ai/sdk`](https://www.npmjs.com/package/@anthropic-ai/sdk) | `ANTHROPIC_API_KEY` (per-token billing from [console.anthropic.com](https://console.anthropic.com)) |
+
+The same model shows up in both — `claude-opus-4-7`, `claude-sonnet-4-6`, etc. Migrating from this prototype to a production-shaped app is largely a matter of swapping the SDK and the auth method.
+
+---
+
 ## What is the Agent SDK?
 
 The Agent SDK is two libraries:

@@ -4,6 +4,8 @@ Three small examples building on each other, all using the OAuth-token / Pro-Max
 
 > **New here?** Read the [top-level README](../README.md) first — it explains what the Agent SDK is, how the OAuth flow works, and the auth-precedence gotcha. This file just covers TypeScript-specific setup and code walkthroughs.
 
+> ⚠️ **Prototyping only.** The OAuth-token approach used here is for personal scripts and learning. Don't use it for production user-facing apps — every request bills against one person's subscription, which doesn't scale to multi-user traffic and may violate Anthropic's terms. For production, use the regular [`@anthropic-ai/sdk`](https://www.npmjs.com/package/@anthropic-ai/sdk) package with an `ANTHROPIC_API_KEY` from [console.anthropic.com](https://console.anthropic.com). See the [top-level README](../README.md#%EF%B8%8F-prototyping-only--do-not-use-for-production-user-facing-apps) for the full reasoning.
+
 ---
 
 ## Setup
